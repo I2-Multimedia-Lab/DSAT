@@ -1,0 +1,35 @@
+import numpy as np
+import cv2
+scale = 4
+scale = 4
+# img = ['img_004', 'img_005','img_008','img_012','img_015','img_019','img_024',
+# 'img_030','img_033','img_041','img_042','img_056','img_058','img_065','img_074','img_078','img_083','img_093']
+# x1 = [866,795,408,718,473,728,569,194,226,250,35,1,354,64,270,758,212,177]
+# y1 = [454,335,220,381,212,324,136,64,51,464,189,611,284,1,250,176,685,21]
+# x2 = [1018,826,475,853,556,797,635,298,282,304,114,51,448,142,448,868,353,288]
+# y2 = [525,416,265,420,273,395,170,104,294,560,285,655,397,56,335,274,750,63]
+# img = ['223061','216081','148026','145086','108005','102061','86000','78004','8023',]
+# x1 = [215,239,159,340,408,35,152,1,184,]
+# y1 = [218,143,132,170,110,193,174,369,147,]
+# x2 = [280,295,238,479,443,103,190,71,242,]
+# y2 = [271,186,161,237,183,255,238,430,208,]
+img = ['AkkeraKanjinchou','ARMS','Belmondo','BEMADER_P','DollGun','DualJustice','HighschoolKimengumi_vol01','HinagikuKenzan',
+'JangiriPonpon','JijiBabaFight','KyokugenCyclone','LoveHina_vol01','MagicianLoad','MariaSamaNihaNaisyo','MayaNoAkaiKutsu',
+'MukoukizuNoChonbo','ParaisoRoad','PikaruGenkiDesu','PlatinumJungle','PsychoStaff','Raphael',
+'ShimatteIkouze_vol01','TapkunNoTanteisitsu','TensiNoHaneToAkumaNoShippo','TetsuSan','ThatsIzumiko_000','TotteokiNoABC',
+'UltraEleven','YumeiroCooking']
+x1 = [264,729,448,504,629,487,289,243,135,162,344,387,523,643,224,588,359,62,670,682,11,202,283,18]
+y1 = [16,346,15,929,905,420,910,603,684,832,713,68,772,15,53,518,1003,397,917,437,588,248,1,667]
+x2 = [541,817,732,625,777,585,403,335,261,329,432,566,645,803,309,808,458,315,772,757,264,462,532,176]
+y2 = [64,466,63,1081,961,523,1011,751,807,937,845,170,947,127,357,546,1090,474,1127,535,614,286,47,992]
+def dasr(img, x1, y1, x2, y2):
+    for img, x1, y1, x2, y2 in zip(img, x1, y1, x2, y2):
+            image_path2 = '/home/lqg/code/results/manga109/dasr/1/'+str(img)+'_x4.0_SR.png'
+            Simage_path = '/home/lqg/code/results/pic/manga1092/dasr/'+str(img)+'S.png'
+            image2 = cv2.imread(image_path2)
+
+            SRfirst_point = (x1, y1)
+            SRlast_point = (x2, y2)
+            # cv2.rectangle(image2, SRfirst_point, SRlast_point, (0, 0, 255), 2)
+            cv2.imwrite(Simage_path, image2[y1:y2, x1:x2])
+dasr(img, x1, y1, x2, y2)
