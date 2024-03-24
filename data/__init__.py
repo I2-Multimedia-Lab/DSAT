@@ -29,6 +29,6 @@ class Data:
             testset,
             batch_size=1,
             shuffle=False,
-            pin_memory=not args.cpu
+            pin_memory=False
         )
 
