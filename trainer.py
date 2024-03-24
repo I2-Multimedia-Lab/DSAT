@@ -164,9 +164,9 @@ class Trainer():
             dir = './experiment/blindsr_x' + str(int(self.args.scale[0])) + '_bicubic_iso'
         elif self.args.blur_type == 'aniso_gaussian':
             dir = './experiment/blindsr_x' + str(int(self.args.scale[0])) + '_bicubic_aniso'
-        DASR = BlindSR().cuda()
-        DASR.load_state_dict(torch.load(dir + '/model/model_' + str(epoch)+ '.pt',map_location='cuda:0'), strict=False)
-        DASR.eval()
+        DSAT = DSAT().cuda()
+        DSAT.load_state_dict(torch.load(dir + '/model/model_' + str(epoch)+ '.pt',map_location='cuda:0'), strict=False)
+        DSAT.eval()
         print(dir + '/model/model_' + str(epoch) + '.pt')
 
 
@@ -196,7 +196,7 @@ class Trainer():
                     hr = hr[0]
                     timer_test.tic()
                     B, C, h_old, w_old = lr[:, 0, ...].shape
-                    sr = DASR(lr[:, 0, ...])
+                    sr = DSAT(lr[:, 0, ...])
                     sr =sr[..., :int(h_old * self.args.scale[0]), :int(w_old * self.args.scale[0])]
                     timer_test.hold()
                     sr = utility.quantize(sr, self.args.rgb_range)
